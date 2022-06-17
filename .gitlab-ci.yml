@@ -1,0 +1,8 @@
+validate_configuration:
+  stage: test
+  image: registry.gitlab.com/tbro/simple-configuration-server:0.12.2
+  script:
+    - rm -r /etc/scs/*
+    - cp -r ./configuration/* /etc/scs
+    - cd /app
+    - python validate.py
