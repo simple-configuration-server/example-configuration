@@ -1,3 +1,12 @@
+# Stages are manually defined, to make sure the testing is done before building
+# the image, and not vice-versa
+stages:
+  - test
+  - build
+  # In your own implementations, you can also add a deploy stage, to take
+  # full advantage of GitLab CI/CD, and automatically deploy if tagged
+  # - deploy
+
 validate_configuration:
   stage: test
   image: registry.gitlab.com/tbro/simple-configuration-server:0.12.2
