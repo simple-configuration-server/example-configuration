@@ -1,0 +1,5 @@
+context:
+  host: !scs-common 'global.yaml#elasticsearch.host'
+
+headers:
+  Content-Type: application/x-yaml

@@ -1,0 +1,19 @@
+# You also may want to use configuration variables from other repitories.
+# You can for example, use git submodules to add files from a another
+# repository, to a subdirectory of your 'common' directory, e.g. if you have
+# a global definition of environments somewhere...
+testing:
+  domains:
+  - eu.example-testing.com
+  - us.example-testing.com
+  subnet: 172.16.32.1/24
+staging:
+  domains:
+  - eu.example-staging.com
+  - us.example-staging.com
+  subnet: 172.16.48.1/24
+production:
+  domains:
+  - eu.example.com
+  - us.example.com
+  subnet: 172.16.64.1/24

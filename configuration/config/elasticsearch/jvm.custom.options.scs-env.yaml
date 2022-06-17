@@ -1,0 +1,6 @@
+# Note that by sending a POST request, the 'heap_size_gb' can also be passed
+# in the body as JSON, to override the below value
+headers:
+  Content-Type: text/plain
+
+methods: ["POST"] # Must pass the 'heap_size_gb' property

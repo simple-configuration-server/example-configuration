@@ -1,0 +1,23 @@
+# This is an example of a basic configuration. For all available configuration
+# parameters, please refer to configuration/scs-validate.TEMPLATE.yaml in
+# the 'simple-configuration-server' repository
+endpoints:
+  /configs/elasticsearch/jvm.custom.options:
+    request:
+      method: POST
+      json:
+        heap_size_gb: 4
+    response:
+      text: "-Xms4g\n-Xmx4g\n"
+  /configs/elasticsearch/elasticsearch.yml:
+    response:
+      yaml:
+        network.host: 172.16.48.8
+        http.port: 9200
+        discovery.type: single-node
+        xpack.security.enabled: true
+  /configs/var/domains.json:
+    response:
+      json:
+        - eu.example-staging.com
+        - us.example-staging.com

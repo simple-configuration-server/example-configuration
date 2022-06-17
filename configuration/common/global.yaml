@@ -1,0 +1,5 @@
+# The 'common' feature can be used to specify global variables, that can
+# be referenced from any scs-env file, using the !scs-common tag
+timezone: Etc/UTC
+elasticsearch:
+  host: 172.16.48.8

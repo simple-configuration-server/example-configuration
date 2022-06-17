@@ -1,0 +1,35 @@
+# This is an example of a basic configuration. For all available configuration
+# parameters, please refer to configuration/scs-users.TEMPLATE.yaml in the
+# 'simple-configuration-server' repository
+users:
+  - id: es-node
+    token: !scs-secret 'scs-tokens.yaml#es-node'
+    has_access:
+      to_paths:
+        - /configs/elasticsearch/*
+        - /configs/var/*
+      from_networks:
+        - 172.16.48.0/24
+  - id: first-server
+    token: !scs-secret 'scs-tokens.yaml#first-server'
+    has_access:
+      to_paths:
+        - /configs/server/first/*
+        - /configs/var/*
+      from_networks:
+        - 172.16.48.0/24
+  - id: second-server
+    token: !scs-secret 'scs-tokens.yaml#second-server'
+    has_access:
+      to_paths:
+        - /configs/server/second/*
+        - /configs/var/*
+      from_networks:
+        - 172.16.48.0/24
+  - id: superuser
+    token: bestuserever
+    has_access:
+      to_paths:
+        - /configs/*
+      from_networks:
+        - 127.0.0.1/32

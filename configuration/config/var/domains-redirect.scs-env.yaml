@@ -1,0 +1,11 @@
+# It's possible create 'redirect' urls.
+# Please beware however, that you should be absolutely sure that your
+# web request libarary/tool doesn't forward 'Authorization' headers to the
+# the URL in case it's another host (e.g. like this vulnerability:
+# https://nvd.nist.gov/vuln/detail/CVE-2014-1829), because otherwise you'll
+# send your SCS credentials to a public server
+# Therefore it's advised to use this mainly to redirect to resources in scs
+# (e.g if you've renamed a configuration file...)
+status: 301
+headers:
+  Location: ./domains.json

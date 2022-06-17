@@ -1,0 +1,4 @@
+- username: first-server
+  password: !scs-secret 'elasticsearch.yml#users.first-server'
+- username: second-server
+  password: !scs-secret 'elasticsearch.yml#users.second-server'

@@ -1,0 +1,4 @@
+network.host: {{ host }}
+http.port: 9200
+discovery.type: single-node
+xpack.security.enabled: true

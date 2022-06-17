@@ -1,0 +1,8 @@
+context:
+  domains: !scs-common 'remote-files/environments.yaml#staging.domains'
+
+# These headers override the default 'text/plain' content type that's set the
+# scs-env.yaml file inside the var/ directory, since this is the more
+# specific file for the domains.json endpoint
+headers:
+  Content-Type: application/json

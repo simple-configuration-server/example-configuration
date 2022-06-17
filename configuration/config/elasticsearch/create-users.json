@@ -1,0 +1,6 @@
+[
+{% for user in users %}
+    {"username": "{{ user.username }}", "password": "{{ user.password }}"}{% if not loop.last %},{% endif %}
+
+{% endfor %}
+]
