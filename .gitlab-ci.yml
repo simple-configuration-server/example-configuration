@@ -19,4 +19,4 @@ build_docker_image:
     - docker build . -t $IMAGE_TAG
     - docker push $IMAGE_TAG
   only:
-    -tags
+    - tags
