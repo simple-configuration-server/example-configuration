@@ -1,3 +1,7 @@
+# Simple CI/CD configuration that illustrates how to test the configuration
+# data, and build a versioned scs docker image that includes your configuration
+# data
+
 # Stages are manually defined, to make sure the testing is done before building
 # the image, and not vice-versa
 stages:
@@ -15,6 +19,7 @@ validate_configuration:
     - cp -r ./configuration/* /etc/scs
     - cd /app
     - python validate.py
+  timeout: 2 minutes
 
 build_docker_image:
   stage: build
@@ -29,3 +34,4 @@ build_docker_image:
     - docker push $IMAGE_TAG
   only:
     - tags
+  timeout: 5 minutes

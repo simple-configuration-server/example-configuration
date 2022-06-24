@@ -1,0 +1,21 @@
+# Docker compose configuration that illustrates how to run the image generated
+# using CI/CD
+
+version: "3.9"
+
+services:
+  server:
+    image: registry.gitlab.com/tbro/example-scs-configuration:1.0.0
+    volumes:
+      # Since the image is pre-built, only secrets need to added
+      - ./configuration/secrets:/etc/scs/secrets
+      # On production environments that use SSL, also mount the SSL keys. These
+      # should be mounted under /etc/ssl/certs/scs.crt and
+      # /etc/ssl/private/scs.key
+      #
+      # In case you set logs to be written to the local filesystem, you can
+      # additionally use a docker volume, to share them with other containers.
+      # You can for example run a second container with filebeat, to index
+      # the logs in ElasticSearch
+    ports:
+      - 3000:80
