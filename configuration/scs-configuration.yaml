@@ -13,8 +13,10 @@ logs:
   # filebeat, to store the logs in a central database
   audit:
     stdout:
+      level: INFO
   application:
     stdout:
+      level: INFO
 
 auth:
   options:
