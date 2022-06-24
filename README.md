@@ -153,7 +153,7 @@ mkdir -p .local/secrets
 # Note .TEMPLATE is included in the filename to prevent people from mounting
 # them directly in Docker, and risk storing secrets to the repository on the
 # next commit
-cp ./templates/secrets/elasticsearch.TEMPLATE.yaml ./.local/secrets/elasticsearch.yml
+cp ./templates/secrets/elasticsearch.TEMPLATE.yaml ./.local/secrets/elasticsearch.yaml
 cp ./templates/secrets/scs-tokens.TEMPLATE.yaml ./.local/secrets/scs-tokens.yaml
 docker compose up -d # Run it on the background
 ```
