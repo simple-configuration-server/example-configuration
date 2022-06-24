@@ -26,10 +26,3 @@ users:
         - /configs/var/*
       from_networks:
         - 172.16.48.0/24
-  - id: superuser
-    token: bestuserever
-    has_access:
-      to_paths:
-        - /configs/*
-      from_networks:
-        - 127.0.0.1/32
