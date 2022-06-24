@@ -15,6 +15,11 @@ validate_configuration:
   stage: test
   image: registry.gitlab.com/tbro/simple-configuration-server:0.12.2
   script:
+    # First check that the ci/cd image version is the same as the dockerfile
+    - DOCKERFILE_IMAGE=$(cat Dockerfile | grep -oE 'simple-configuration-server:([0-9]+\.){2}[0-9]+')
+    - CICDFILE_IMAGE=$(cat .gitlab-ci.yml | grep -oE 'simple-configuration-server:([0-9]+\.){2}[0-9]+')
+    - 'if [ "$DOCKERFILE_IMAGE" != "$CICDFILE_IMAGE" ]; then echo "ERROR: Different scs versions used in .gitlab-cy.yml and Dockerfile" && exit 1; fi'
+    # Then run the validation
     - rm -r /etc/scs/*
     - cp -r ./configuration/* /etc/scs
     - cd /app
