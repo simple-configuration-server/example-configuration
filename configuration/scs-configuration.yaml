@@ -28,6 +28,14 @@ auth:
     networks:
       private_only: true
       whitelist:
-      - 127.0.0.1/32
-      - 172.16.0.0/16
+      # These example values are configured to match the ranges used by Docker
+      # so this example server can be accessed from localhost when running
+      # locally. Note that this also whitelists the 192.168 range, which means
+      # it may be accessible from your local-network if you use this range, and
+      # do not have a Firewall in-place.
+      # For production deployments, ALWAYS restrict these values to only the
+      # ranges that need access. You can add individual IP addresses to the
+      # list, or use the CIDR notation to whitelist complete networks.
+      - 172.16.0.0/12
+      - 192.168.0.0/16
     max_auth_fails_per_15_min: 10

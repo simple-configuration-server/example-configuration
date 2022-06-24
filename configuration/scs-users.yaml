@@ -26,3 +26,13 @@ users:
         - /configs/var/*
       from_networks:
         - 172.16.48.0/24
+  # The below user is just for testing . In production deployments,
+  # always use restrictive policies for the 'from_networks' and 'to_paths'
+  - id: superuser
+    token: !scs-secret 'scs-tokens.yaml#superuser'
+    has_access:
+      to_paths:
+        - /configs/*
+      from_networks:
+        - 172.16.0.0/12
+        - 192.168.0.0/16
