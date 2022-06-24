@@ -19,6 +19,8 @@ validate_configuration:
     - cp -r ./configuration/* /etc/scs
     - cd /app
     - python validate.py
+  only:
+    - tags
   timeout: 2 minutes
 
 build_docker_image:

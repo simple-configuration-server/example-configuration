@@ -8,7 +8,7 @@ services:
     image: registry.gitlab.com/tbro/example-scs-configuration:1.0.0
     volumes:
       # Since the image is pre-built, only secrets need to added
-      - ./configuration/secrets:/etc/scs/secrets
+      - ./.local/secrets:/etc/scs/secrets
       # On production environments that use SSL, also mount the SSL keys. These
       # should be mounted under /etc/ssl/certs/scs.crt and
       # /etc/ssl/private/scs.key
