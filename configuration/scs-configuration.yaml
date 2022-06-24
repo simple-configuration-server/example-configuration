@@ -7,18 +7,14 @@ directories:
   secrets: &secrets-dir !scs-expand-env ${SCS_CONFIG_DIR}/secrets
 
 logs:
+  # By logging to stdout, the logs are available via the 'docker logs' command.
+  # alternatively, you can log to the filesystem and use a docker volume in
+  # combination with an additional container that runs log centralization, like
+  # filebeat, to store the logs in a central database
   audit:
-    file:
-      path: /var/log/scs/audit.log.jsonl
-      max_size_mb: 1
-      backup_count: 5
-      level: INFO
+    stdout:
   application:
-    file:
-      path: /var/log/scs/app.log.jsonl
-      max_size_mb: 1
-      backup_count: 5
-      level: INFO
+    stdout:
 
 auth:
   options:
