@@ -8,16 +8,31 @@ endpoints:
       json:
         heap_size_gb: 4
     response:
-      text: "-Xms4g\n-Xmx4g\n"
+      text: "-Xms4g\n-Xmx4g\n"  # Match an exact piece of text
   /configs/elasticsearch/elasticsearch.yml:
     response:
-      yaml:
+      yaml:  # Parse response as YAML, and check if it's equal to the below
         network.host: 172.16.48.8
         http.port: 9200
         discovery.type: single-node
         xpack.security.enabled: true
   /configs/var/domains.json:
     response:
-      json:
+      json:  # Parse response as JSON, and check if it's equal to the below
         - eu.example-staging.com
         - us.example-staging.com
+  # Using wildcards, urls matching a specific pattern , can be easily checked
+  # In case a URL matches a wildcard, but also a specific endpoint
+  # configuration (e.g. see the above). Any sub-properties (meaning: properties
+  # under request/response) defined in the specific endpoint configuration
+  # override the same properties defined in the wildcard configuration
+  /configs/*.json:
+    response:
+      format: json
+      headers:
+        Content-Type: application/json
+  /configs/*.yml:
+    response:
+      format: yaml
+      headers:
+        Content-Type: application/x-yaml
