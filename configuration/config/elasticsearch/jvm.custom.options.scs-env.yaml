@@ -6,3 +6,14 @@ response:
 
 request:
   methods: ["POST"] # Must pass the 'heap_size_gb' property
+  # If specific elements should be inside the post request JSON body, add a
+  # schema to validate the POST request contents agains
+  schema:
+    type: object
+    required:
+      - heap_size_gb
+    properties:
+      heap_size_gb:
+        type: integer
+        minimum: 2
+        maximum: 32

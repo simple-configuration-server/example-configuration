@@ -1,0 +1,8 @@
+# In case you don't want to use templating features and/or they interfere with
+# the content of a file, you can disable templating for an enpoint
+template:
+  enabled: false
+
+response:
+  headers:
+    Content-Type: text/plain

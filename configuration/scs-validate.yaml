@@ -16,6 +16,9 @@ endpoints:
         http.port: 9200
         discovery.type: single-node
         xpack.security.enabled: true
+  /configs/elasticsearch/elasticsearch.yml.template:
+    response:
+      text: "network.host: {{ host }}\nhttp.port: 9200\ndiscovery.type: single-node\nxpack.security.enabled: true\n"
   /configs/var/domains.json:
     response:
       json:  # Parse response as JSON, and check if it's equal to the below
