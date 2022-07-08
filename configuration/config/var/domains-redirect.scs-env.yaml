@@ -6,6 +6,7 @@
 # send your SCS credentials to a public server
 # Therefore it's advised to use this mainly to redirect to resources in scs
 # (e.g if you've renamed a configuration file...)
-status: 301
-headers:
-  Location: ./domains.json
+response:
+  status: 301
+  headers:
+    Location: ./domains.json

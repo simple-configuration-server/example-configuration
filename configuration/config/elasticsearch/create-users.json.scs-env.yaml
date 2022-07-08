@@ -1,5 +1,7 @@
-context:
-  users: !scs-common 'users/elasticsearch.yaml'
+template:
+  context:
+    users: !scs-common 'users/elasticsearch.yaml'
 
-headers:
-  Content-Type: application/json
+response:
+  headers:
+    Content-Type: application/json

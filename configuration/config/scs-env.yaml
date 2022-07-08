@@ -1,5 +1,6 @@
 # An scs-env.yaml file at the root-level of the config directory, applies to
 # all endpoints, unless you override variables in more specific *scs-env.yaml
 # files.
-context:
-  domain: !scs-common 'remote-files/environments.yaml#staging.domains.[1]'
+template:
+  context:
+    domain: !scs-common 'remote-files/environments.yaml#staging.domains.[1]'

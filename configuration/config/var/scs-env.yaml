@@ -1,5 +1,6 @@
 # These settings apply to all endpoints under var/, unless you override them
 # the 'scs-env.yaml' files for specific endpoints
-headers:
-  Content-Type: text/plain
+response:
+  headers:
+    Content-Type: text/plain
   

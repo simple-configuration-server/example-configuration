@@ -13,7 +13,7 @@ stages:
 
 validate_configuration:
   stage: test
-  image: registry.gitlab.com/tbro/simple-configuration-server:0.12.2
+  image: registry.gitlab.com/tbro/simple-configuration-server:1.0.0
   script:
     # First check that the ci/cd image version is the same as the dockerfile
     - DOCKERFILE_IMAGE=$(cat Dockerfile | grep -oE 'simple-configuration-server:([0-9]+\.){2}[0-9]+')

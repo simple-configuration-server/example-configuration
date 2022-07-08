@@ -6,7 +6,7 @@
 # your own configuration, and use a bind-mount to link you local configuration
 # directories to the /etc/scs folder.
 
-FROM registry.gitlab.com/tbro/simple-configuration-server:0.12.2
+FROM registry.gitlab.com/tbro/simple-configuration-server:1.0.0
 # NOTE: For production implementations, ALWAYS keep SSL enabled by removing
 # the below environment variable.
 ENV SCS_DISABLE_SSL=1
