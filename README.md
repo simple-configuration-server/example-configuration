@@ -1,12 +1,12 @@
 # SCS Example Configuration Repository
 This repository contains an example of how you can version-control simple system
 configurations and host them using the
-[Simple Configuration Server](https://gitlab.com/Tbro/simple-configuration-server)
+[Simple Configuration Server](https://gitlab.com/tom-brouwer/simple-configuration-server)
 (SCS). It contains examples of using CI/CD and githooks to validate
 configurations prior to deployment, and build a SCS docker image that includes
 the configuration. This repository only showcases a subset of the features of
 SCS. For a full description of the possibilities of SCS, review the
-documentation in the [SCS repository](https://gitlab.com/Tbro/simple-configuration-server).
+documentation in the [SCS repository](https://gitlab.com/tom-brouwer/simple-configuration-server).
 
 _Note that this repository is meant as an example, and should not be copied
 directly. If you want to apply the structure described in this repository in
@@ -46,7 +46,9 @@ variable and this directory is not empty, validation will fail. Although this
 example does include 'scs-users.yaml', all tokens are sourced from a secrets
 file (using the !scs-secret yaml tag) that is not in this repository. Based on
 your own consideration, you may also choose not to include 'scs-users.yaml' in
-your repository, since this is not required to run the 'validate' script.
+your repository, since this is not required to run the 'validate' script. An
+SSL private key is also considered a secret and should never be in a git
+repository.
 
 ### 1.1 Configuration directory sub-folders
 The configuration directory contains 2 folders:
