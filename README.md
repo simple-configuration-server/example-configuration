@@ -30,6 +30,8 @@ This repository contains the following:
 * **.gitlab-ci.yml**: An example GitLab CI/CD configuration that contains
   uses the validate script to test the configuration, and build a custom
   Docker image that includes the configuration after success.
+* **.github/workflows/main.yml**: An example CI/CD configurations for GitHub
+  actions, which is functionally equivalent to the GitLab configuration
 * **docker-compose.yml**: Example docker docker-compose configuration that uses
   the image build using CI/CD to create and start a Docker container
 * **Dockerfile**: Example of you can build a Docker image that includes the
@@ -140,6 +142,9 @@ configuration. The pipeline is only triggered on tagged commits, meaning you can
 version your configuration using git tags, which will be used as the docker
 image version. Docker images built by the pipeline can be found in the
 'Container Registry' of the GitLab project.
+
+For GitHub users, and equivalent CI/CD configuration (Using GitHub actions) is
+included at [.gihub/workflows/main.yml](.github/workflows/main.yml).
 
 ### 2.2 Running the Docker container
 The [docker-compose.yml](docker-compose.yml) file contains an example
