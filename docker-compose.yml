@@ -5,7 +5,9 @@ version: "3.9"
 
 services:
   server:
-    image: registry.gitlab.com/tom-brouwer/example-scs-configuration:1.0.1
+    image: registry.gitlab.com/tom-brouwer/example-scs-configuration:1.2.1
+    # Alternatively an example for if you've built your image using GitHub
+    # image: ghcr.io/tom-brouwer/example-scs-configuration:1.2.1
     volumes:
       # Since the image is pre-built, only secrets need to added
       - ./.local/secrets:/etc/scs/secrets
