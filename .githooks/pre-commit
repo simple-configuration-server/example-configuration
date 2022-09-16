@@ -5,15 +5,9 @@ SCS_VERSION=1.0.1
 # First make sure that the SCS versions used for (1) the Dockerfile, (2)
 # the CI/CD test stage and (3) this pre-commit hook are in-sync
 DOCKERFILE_CONTENTS=$(cat Dockerfile)
-CICDFILE_CONTENTS=$(cat .gitlab-ci.yml)
 
 if [[ $DOCKERFILE_CONTENTS != *"$SCS_VERSION"* ]]; then
   echo "ERROR: Dockerfile SCS version different from pre-commit hook!"
-  exit 1
-fi
-
-if [[ $CICDFILE_CONTENTS != *"$SCS_VERSION"* ]]; then
-  echo "ERROR: .gitlab-ci.yml SCS version different from pre-commit hook!"
   exit 1
 fi
 

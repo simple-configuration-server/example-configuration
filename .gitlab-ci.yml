@@ -1,45 +1,23 @@
-# Simple CI/CD configuration that illustrates how to test the configuration
-# data, and build a versioned scs docker image that includes your configuration
-# data
+# Simple CI/CD configuration that first builds a docker image including the
+# configuration, and then runs the validation inside a docker container. When
+# successfull, the docker image is uploaded to the container registry
 
-# Stages are manually defined, to make sure the testing is done before building
-# the image, and not vice-versa
-stages:
-  - test
-  - build
-  # In your own implementations, you can also add a deploy stage, to take
-  # full advantage of GitLab CI/CD, and automatically deploy if tagged
-  # - deploy
-
-validate_configuration:
-  stage: test
-  image: registry.gitlab.com/tom-brouwer/simple-configuration-server:1.0.1
-  script:
-    # Validate git tag format
-    - "echo $CI_COMMIT_TAG | grep -oE '^([0-9]+\\.){2}[0-9]+$' || (echo \"ERROR: Invalid tag format, should be a three part version number (e.g. 1.2.3)\" && exit 1)"
-    # First check that the ci/cd image version is the same as the dockerfile
-    - DOCKERFILE_IMAGE=$(cat Dockerfile | grep -oE 'simple-configuration-server:([0-9]+\.){2}[0-9]+')
-    - CICDFILE_IMAGE=$(cat .gitlab-ci.yml | grep -oE 'simple-configuration-server:([0-9]+\.){2}[0-9]+')
-    - 'if [ "$DOCKERFILE_IMAGE" != "$CICDFILE_IMAGE" ]; then echo "ERROR: Different scs versions used in .gitlab-cy.yml and Dockerfile" && exit 1; fi'
-    # Then run the validation
-    - rm -r /etc/scs/*
-    - cp -r ./configuration/* /etc/scs
-    - cd /app
-    - python validate.py
-  only:
-    - tags
-  timeout: 2 minutes
-
-build_docker_image:
+build_docker_image_and_validate:
   stage: build
   image: docker:20
   services:
     - docker:20-dind
   script:
-    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
-    - IMAGE_TAG="$CI_REGISTRY_IMAGE:$CI_COMMIT_TAG"
-    - 'if docker pull $IMAGE_TAG > /dev/null 2>&1; then echo "ERROR: An image with the given tag already exists. Please increment the contents of the VERSION file" && exit 1; fi'
+    - echo -e "\e[96m\e[1mVerify Tag Format\e[0m"
+    - "echo $CI_COMMIT_TAG | grep -oE '^([0-9]+\\.){2}[0-9]+$' || (echo \"ERROR: Invalid tag format, should be a three part version number (e.g. 1.2.3)\" && exit 1)"
+    - echo -e "\e[96m\e[1mBuild Docker Image\e[0m"
+    - IMAGE_TAG=$(echo "$CI_REGISTRY_IMAGE:$CI_COMMIT_TAG" | tr [:upper:] [:lower:])
     - docker build . -t $IMAGE_TAG
+    - echo -e "\e[96m\e[1mValidate Configuration\e[0m"
+    - docker run --rm $IMAGE_TAG python validate.py
+    - echo -e "\e[96m\e[1mPush Docker Image\e[0m"
+    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
+    - 'if docker pull $IMAGE_TAG > /dev/null 2>&1; then echo "ERROR: An image with the given tag already exists. Please increment the contents of the VERSION file" && exit 1; fi'
     - docker push $IMAGE_TAG
   only:
     - tags
