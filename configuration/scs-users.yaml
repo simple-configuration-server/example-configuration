@@ -1,38 +1,37 @@
 # This is an example of a basic configuration. For all available configuration
 # parameters, please refer to configuration/scs-users.TEMPLATE.yaml in the
 # 'simple-configuration-server' repository
-users:
-  - id: es-node
-    token: !scs-secret 'scs-tokens.yaml#es-node'
-    has_access:
-      to_paths:
-        - /configs/elasticsearch/*
-        - /configs/var/*
-      from_networks:
-        - 172.16.48.0/24
-  - id: first-server
-    token: !scs-secret 'scs-tokens.yaml#first-server'
-    has_access:
-      to_paths:
-        - /configs/server/first/*
-        - /configs/var/*
-      from_networks:
-        - 172.16.48.0/24
-  - id: second-server
-    token: !scs-secret 'scs-tokens.yaml#second-server'
-    has_access:
-      to_paths:
-        - /configs/server/second/*
-        - /configs/var/*
-      from_networks:
-        - 172.16.48.0/24
-  # The below user is just for testing . In production deployments,
-  # always use restrictive policies for the 'from_networks' and 'to_paths'
-  - id: superuser
-    token: !scs-secret 'scs-tokens.yaml#superuser'
-    has_access:
-      to_paths:
-        - /configs/*
-      from_networks:
-        - 172.16.0.0/12
-        - 192.168.0.0/16
+- id: es-node
+  token: !scs-secret 'scs-tokens.yaml#es-node'
+  has_access:
+    to_paths:
+      - /configs/elasticsearch/*
+      - /configs/var/*
+    from_networks:
+      - 172.16.48.0/24
+- id: first-server
+  token: !scs-secret 'scs-tokens.yaml#first-server'
+  has_access:
+    to_paths:
+      - /configs/server/first/*
+      - /configs/var/*
+    from_networks:
+      - 172.16.48.0/24
+- id: second-server
+  token: !scs-secret 'scs-tokens.yaml#second-server'
+  has_access:
+    to_paths:
+      - /configs/server/second/*
+      - /configs/var/*
+    from_networks:
+      - 172.16.48.0/24
+# The below user is just for testing . In production deployments,
+# always use restrictive policies for the 'from_networks' and 'to_paths'
+- id: superuser
+  token: !scs-secret 'scs-tokens.yaml#superuser'
+  has_access:
+    to_paths:
+      - /configs/*
+    from_networks:
+      - 172.16.0.0/12
+      - 192.168.0.0/16
