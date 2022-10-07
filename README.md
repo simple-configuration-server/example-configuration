@@ -1,12 +1,12 @@
 # SCS Example Configuration Repository
 This repository contains an example of how you can version-control simple system
 configurations and host them using the
-[Simple Configuration Server](https://gitlab.com/tom-brouwer/simple-configuration-server)
+[Simple Configuration Server](https://github.com/tom-brouwer/simple-configuration-server)
 (SCS). It contains examples of using CI/CD and githooks to validate
 configurations prior to deployment, and build a SCS docker image that includes
 the configuration. This repository only showcases a subset of the features of
 SCS. For a full description of the possibilities of SCS, review the
-documentation in the [SCS repository](https://gitlab.com/tom-brouwer/simple-configuration-server).
+documentation in the [SCS repository](https://github.com/tom-brouwer/simple-configuration-server).
 
 _Note that this repository is meant as an example, and should not be copied
 directly. If you want to apply the structure described in this repository in
