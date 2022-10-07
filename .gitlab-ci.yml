@@ -1,3 +1,5 @@
+# Example GitLab CI/CD configuration
+#
 # Simple CI/CD configuration that first builds a docker image including the
 # configuration, and then runs the validation inside a docker container. When
 # successfull, the docker image is uploaded to the container registry

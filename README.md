@@ -27,11 +27,11 @@ This repository contains the following:
   * **scs-users.yaml**: The list of users, including their authorizations.
   * **scs-validate.yaml**: The settings for configuration validation. This is
     only used by the validate.py script for testing.
-* **.gitlab-ci.yml**: An example GitLab CI/CD configuration that contains
-  uses the validate script to test the configuration, and build a custom
-  Docker image that includes the configuration after success.
 * **.github/workflows/main.yml**: An example CI/CD configurations for GitHub
-  actions, which is functionally equivalent to the GitLab configuration
+  actions, that builds a Docker image with the configuration, and uses the
+  included validation script to validate the configuration.
+* **.gitlab-ci.yml**: An example GitLab CI/CD configuration that's functionally
+  equivalent to the GitHub configuration
 * **docker-compose.yml**: Example docker docker-compose configuration that uses
   the image build using CI/CD to create and start a Docker container
 * **Dockerfile**: Example of you can build a Docker image that includes the
@@ -135,16 +135,16 @@ Below is a list of the functionality illustrated by some of the endpoints:
 ## 2 Usage
 
 ### 2.1 CI/CD
-The [.gitlab-ci.yml](.gitlab-ci.yml) defines the GitLab CI/CD configuration
-for this repository. The CI/CD pipeline configured in this file both tests the
-contents of the repository, and builds a docker image that includes the
-configuration. The pipeline is only triggered on tagged commits, meaning you can
-version your configuration using git tags, which will be used as the docker
-image version. Docker images built by the pipeline can be found in the
-'Container Registry' of the GitLab project.
+The [GitHub workflow definition file](.github/workflows/main.yml) contains the
+steps that are executed on GitHub each time a new git tag is added to the
+repository. Each time, a new Docker image is built including the configuration
+in this repository, having the version number of the git tag. After building,
+the 'validate.py' script is run in the container to test if the configuration
+is valid. When valid, the Docker image is uploaded to the GitHub Container
+Registry.
 
-For GitHub users, and equivalent CI/CD configuration (Using GitHub actions) is
-included at [.gihub/workflows/main.yml](.github/workflows/main.yml).
+For GitLab users, and equivalent CI/CD configuration can be found
+in [.gitlab-ci.yml](.gitlab-ci.yml).
 
 ### 2.2 Running the Docker container
 The [docker-compose.yml](docker-compose.yml) file contains an example
@@ -182,5 +182,5 @@ Before commiting any changes to the repositories, make sure to run the
 `./enable_githooks.sh` script to ensure the pre-commit tests are run.
 
 To trigger the build of a new Docker container, assign a git tag to your commit
-and push it to GitLab, e.g.: `git tag 1.2.3 && git push --tags` (Note that
+and push it to GitHub, e.g.: `git tag 1.2.3 && git push --tags` (Note that
 prior to doing this you need to have pushed your commits already).

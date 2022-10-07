@@ -1,3 +1,9 @@
+---
+name: Report Issue
+about: Report an issue with the SCS Example Configuration
+labels: new
+assignees: tom-brouwer
+---
 ## 1 Description
 [Please provide a concise description of the issue you're facing, or things
 that you think are missing from the example configuration]

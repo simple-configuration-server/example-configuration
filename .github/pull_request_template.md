@@ -1,7 +1,6 @@
-_Please note that all pull-requests must be backed by an issue submitted via
-the GitLab project page_
+_Please note that all pull-requests must be backed by an issue_
 
-In response to: [Provide a link to the issue here]
+In response to: #[Type issue number here]
 
 ## Description
 [Please provide a functional description of your code changes. If you have any
