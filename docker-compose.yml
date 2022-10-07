@@ -5,7 +5,7 @@ version: "3.9"
 
 services:
   server:
-    image: registry.gitlab.com/tom-brouwer/example-scs-configuration:1.2.1
+    image: ghcr.io/tom-brouwer/example-scs-configuration:1.2.1
     # Alternatively an example for if you've built your image using GitHub
     # image: ghcr.io/tom-brouwer/example-scs-configuration:1.2.1
     volumes:
