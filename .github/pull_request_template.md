@@ -13,4 +13,4 @@ Before submitting, all points below must be checked:
       hook tests were succesful
 - [ ] Your commit messages follow the guidelines [here](https://google.github.io/eng-practices/review/developer/cl-descriptions.html)
 - [ ] You've used [git rebase](https://git-scm.com/book/en/v2/Git-Branching-Rebasing) to
-      make sure your commit history is the same as on 'master' branch
+      make sure your commit history is the same as on 'main' branch
