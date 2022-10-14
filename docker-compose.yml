@@ -5,9 +5,7 @@ version: "3.9"
 
 services:
   server:
-    image: ghcr.io/tom-brouwer/example-scs-configuration:1.2.1
-    # Alternatively an example for if you've built your image using GitHub
-    # image: ghcr.io/tom-brouwer/example-scs-configuration:1.2.1
+    image: ghcr.io/simple-configuration-server/example-configuration:1.2.1
     volumes:
       # Since the image is pre-built, only secrets need to added
       - ./.local/secrets:/etc/scs/secrets
