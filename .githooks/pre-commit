@@ -1,7 +1,7 @@
 #!/bin/bash
 
 CONFIG_PATH=$(pwd)/configuration
-SCS_VERSION=1.0.2
+SCS_VERSION=1.0.3
 # First make sure that the SCS versions used for (1) the Dockerfile, (2)
 # the CI/CD test stage and (3) this pre-commit hook are in-sync
 DOCKERFILE_CONTENTS=$(cat Dockerfile)
@@ -12,4 +12,4 @@ if [[ $DOCKERFILE_CONTENTS != *"$SCS_VERSION"* ]]; then
 fi
 
 # Now run the validation script in Docker
-docker run --rm -v "$CONFIG_PATH:/etc/scs:ro" "registry.gitlab.com/tom-brouwer/simple-configuration-server:$SCS_VERSION" python validate.py
+docker run --rm -v "$CONFIG_PATH:/etc/scs:ro" "ghcr.io/simple-configuration-server/simple-configuration-server:$SCS_VERSION" python validate.py
