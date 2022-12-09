@@ -6,7 +6,7 @@
 # your own configuration, and use a bind-mount to link you local configuration
 # directories to the /etc/scs folder.
 
-FROM ghcr.io/simple-configuration-server/simple-configuration-server:1.0.3
+FROM ghcr.io/simple-configuration-server/simple-configuration-server:2.0.0
 # NOTE: For production implementations, ALWAYS keep SSL enabled by removing
 # the below environment variable.
 ENV SCS_DISABLE_SSL=1

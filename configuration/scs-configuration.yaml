@@ -3,7 +3,7 @@
 # the 'simple-configuration-server' repository
 directories:
   common: !scs-expand-env ${SCS_CONFIG_DIR}/common
-  config: !scs-expand-env ${SCS_CONFIG_DIR}/config
+  endpoints: !scs-expand-env ${SCS_CONFIG_DIR}/endpoints
   secrets: &secrets-dir !scs-expand-env ${SCS_CONFIG_DIR}/secrets
 
 logs:
