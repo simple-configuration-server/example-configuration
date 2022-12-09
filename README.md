@@ -21,7 +21,7 @@ This repository contains the following:
   validated before a commit.
 * **configuration/**: Folder containing the full configuration for scs, with
   the exception of secrets, which should never be stored in version control:
-  * **config/ & common/**: The contents of these folders are discussed in
+  * **endpoints/ & common/**: The contents of these folders are discussed in
     detail in section 1.1.
   * **scs-configuration.yaml**: The configuration for the SCS
   * **scs-users.yaml**: The list of users, including their authorizations.
@@ -56,8 +56,8 @@ repository.
 The configuration directory contains 2 folders:
 1. **common/**: A directory with YAML files that contain common files used by
    multiple endpoints
-2. **config/**: The structure and contents of this directory and its children
-   is used by SCS to build the URL paths
+2. **endpoints/**: The structure and contents of this directory and its children
+   is used by SCS serve the endpoints under the /configs/ url paths
 
 #### 1.1.1 common/ directory
 This contains some examples of how the 'common' directory can be used:
@@ -79,7 +79,7 @@ This contains some examples of how the 'common' directory can be used:
 _Note that if you do not want to use common configuration variables, you can
 just leave the directory emtpy_
 
-#### 1.1.2 config/ directory
+#### 1.1.2 endpoints/ directory
 This contains some different examples of how you can structure the
 configuration paths of your SCS implementation. For example you can
 use paths for specific systems (elasticsearch/), paths for specific
@@ -91,12 +91,12 @@ Note since you have to define path authorizations for each user in
 SCS auth module), you should design your configuration directory
 structure in such a way that you can authorize users properly.
 
-The config/ directory and it's subfolders contain (1) The configuration file
-templates, which are used by SCS as the paths for the actual endpoints, and
-(2) scs-env.yaml files, that define the environment for each endpoint.
-Environment files among others define the context variables, available in the
-template, the allowed HTTP methods for an endpoint, and the status code and
-headers to send in in the response.
+The endpoints/ directory and it's subfolders contain (1) The
+configuration file/endpoint templates, which are used by SCS as the paths for
+the actual endpoints, and (2) scs-env.yaml files, that define the environment
+for each endpoint. Environment files among others define the context variables,
+available in the template, the allowed HTTP methods for an endpoint, and the
+status code and headers to send in in the response.
 
 Each directory can have a global scs-env file, which applies to
 all endpoints in the directory, as well as the ones in sub-directories. Also,
