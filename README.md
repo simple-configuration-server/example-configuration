@@ -1,18 +1,16 @@
 # SCS Example Configuration Repository
 This repository contains an example of how you can version-control simple system
-configurations and host them using the
-[Simple Configuration Server](https://github.com/simple-configuration-server/simple-configuration-server)
+configurations and host them using the [Simple Configuration Server](https://github.com/simple-configuration-server/simple-configuration-server)
 (SCS). It contains examples of using CI/CD and githooks to validate
 configurations prior to deployment, and build a SCS docker image that includes
 the configuration. This repository only showcases a subset of the features of
-SCS. For a full description of the possibilities of SCS, review the
-documentation in the [SCS repository](https://github.com/simple-configuration-server/simple-configuration-server).
+SCS. For a full description of the possibilities of SCS, please see the
+[SCS Website](https://simple-configuration-server.github.io/)
 
 _Note that this repository is meant as an example, and should not be copied
 directly. If you want to apply the structure described in this repository in
 your own project, you have to review all settings and configuration files.
-Among others, SSL should be enabled and more specific IP restrictions should be
-set._
+Considerations for deployment can be found on the [SCS Website](https://simple-configuration-server.github.io/docs/deployment)._
 
 ## 1. Contents
 This repository contains the following:
@@ -54,12 +52,13 @@ repository.
 
 ### 1.1 Configuration directory sub-folders
 The configuration directory contains 2 folders:
-1. **common/**: A directory with YAML files that contain common files used by
-   multiple endpoints
-2. **endpoints/**: The structure and contents of this directory and its children
-   is used by SCS serve the endpoints under the /configs/ url paths
+1. **endpoints/**: The structure and contents of this directory and its children
+   is used by SCS serve the endpoints under the /configs/ url paths. More info
+   [here](https://simple-configuration-server.github.io/docs/server-configuration/endpoints-directory).
+2. **common/**: A directory with YAML files that contain common files used by
+   multiple endpoints. More info [here](https://simple-configuration-server.github.io/docs/server-configuration/common-directory).
 
-#### 1.1.1 common/ directory
+#### 1.1.1 common/ directory contents
 This contains some examples of how the 'common' directory can be used:
 * **remote-files/**: This is an example of how configuration files from other
   sources, such as other git repositories, can be used by SCS. You can for
@@ -76,10 +75,7 @@ This contains some examples of how the 'common' directory can be used:
   will add every variable to the context of every child directory/endpoint,
   which you may not want (especially for secrets).
 
-_Note that if you do not want to use common configuration variables, you can
-just leave the directory emtpy_
-
-#### 1.1.2 endpoints/ directory
+#### 1.1.2 endpoints/ directory contents
 This contains some different examples of how you can structure the
 configuration paths of your SCS implementation. For example you can
 use paths for specific systems (elasticsearch/), paths for specific
@@ -90,27 +86,6 @@ Note since you have to define path authorizations for each user in
 [scs-users.yaml](configuration/scs-users.yaml) (If you're using the built-in
 SCS auth module), you should design your configuration directory
 structure in such a way that you can authorize users properly.
-
-The endpoints/ directory and it's subfolders contain (1) The
-configuration file/endpoint templates, which are used by SCS as the paths for
-the actual endpoints, and (2) scs-env.yaml files, that define the environment
-for each endpoint. Environment files among others define the context variables,
-available in the template, the allowed HTTP methods for an endpoint, and the
-status code and headers to send in in the response.
-
-Each directory can have a global scs-env file, which applies to
-all endpoints in the directory, as well as the ones in sub-directories. Also,
-a specific scs-env.yaml file for a single endpoint can be defined. For example
-for the file `/servers/first/es-credentials.json`, the following scs-env.yaml
-files are used (if these exist), each one possibly overriding properties
-defined in the previous:
-
-1. [scs-env.yaml](configuration/config/scs-env.yaml)
-2. servers/scs-env.yaml
-3. servers/first/scs-env.yaml
-4. [servers/first/es-credentials.json.scs-env.yaml](configuration/config/servers/first/es-credentials.json.scs-env.yaml)
-
-In the above example, only 1 and 4 are relevant, since 2 and 3 do not exist.
 
 Below is a list of the functionality illustrated by some of the endpoints:
 * **/var/hostname-prefix**: this is the simplest way an endpoint can be
@@ -166,8 +141,8 @@ docker compose up -d # Run it on the background
 ```
 _Note you need to have docker and docker compose (v2) installed_
 
-Since all 'secrets' in these files define the '!scs-gen-secret' tag, these are
-auto-generated and saved when first running the container.
+Since all 'secrets' in the above YAML templates use the '!scs-gen-secret' tag,
+these are auto-generated and saved when first running the container.
 
 Now you can use e.g. curl to get data from the server. Note that you can find
 the token for the superuser in your .local/secrets/scs-tokens.yaml file:
