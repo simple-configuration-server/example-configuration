@@ -5,12 +5,12 @@ configurations and host them using the [Simple Configuration Server](https://git
 configurations prior to deployment, and build a SCS docker image that includes
 the configuration. This repository only showcases a subset of the features of
 SCS. For a full description of the possibilities of SCS, please see the
-[SCS Website](https://simple-configuration-server.github.io/)
+[SCS Website](https://simple-configuration-server.com/)
 
 _Note that this repository is meant as an example, and should not be copied
 directly. If you want to apply the structure described in this repository in
 your own project, you have to review all settings and configuration files.
-Considerations for deployment can be found on the [SCS Website](https://simple-configuration-server.github.io/docs/deployment)._
+Considerations for deployment can be found on the [SCS Website](https://simple-configuration-server.com/docs/deployment)._
 
 ## 1. Contents
 This repository contains the following:
@@ -20,8 +20,8 @@ This repository contains the following:
 * **configuration/**: Folder containing all configuration files for the SCS,
   with the exception of secrets, since secrets should never be stored in a
   git repository. For a description of what every configuration file does,
-  please read the   [server configuration documentation](https://simple-configuration-server.github.io/docs/server-configuration)
-  and [configuration validation documentation](https://simple-configuration-server.github.io/docs/configuration-validation#2-scs-validateyaml-configuration-file).
+  please read the   [server configuration documentation](https://simple-configuration-server.com/docs/server-configuration)
+  and [configuration validation documentation](https://simple-configuration-server.com/docs/configuration-validation#2-scs-validateyaml-configuration-file).
 * **.github/workflows/main.yml**: An example CI/CD configuration for GitHub
   actions, that builds a Docker image with the configuration, and uses the
   included validation script to validate the configuration.
@@ -53,7 +53,7 @@ structure your data and endpoints in SCS.
 
 #### 1.1.1 common/
 The common directory can be used to store configuration variables that are
-used by multiple endpoints, as described in the [documentation](https://simple-configuration-server.github.io/docs/server-configuration/common-directory).
+used by multiple endpoints, as described in the [documentation](https://simple-configuration-server.com/docs/server-configuration/common-directory).
 
 The [configuration/common](configuration/common) directory contains some
 examples of how this directory can be used:
@@ -73,7 +73,7 @@ examples of how this directory can be used:
 
 #### 1.1.2 endpoints/
 The endpoints directory defines the server endpoints as described in the
-[documentation](https://simple-configuration-server.github.io/docs/server-configuration/endpoints-directory).
+[documentation](https://simple-configuration-server.com/docs/server-configuration/endpoints-directory).
 
 The [configuration/endpoints](configuration/endpoints) directory contains some
 different examples of how you can structure the endpoints of your SCS
