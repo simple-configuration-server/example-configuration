@@ -17,24 +17,21 @@ This repository contains the following:
 * **.githooks/**: Folder containing a pre-commit githook to run the SCS
   validation script locally using Docker, so the integrity of the files is
   validated before a commit.
-* **configuration/**: Folder containing the full configuration for scs, with
-  the exception of secrets, which should never be stored in version control:
-  * **endpoints/ & common/**: The contents of these folders are discussed in
-    detail in section 1.1.
-  * **scs-configuration.yaml**: The configuration for the SCS
-  * **scs-users.yaml**: The list of users, including their authorizations.
-  * **scs-validate.yaml**: The settings for configuration validation. This is
-    only used by the validate.py script for testing.
-* **.github/workflows/main.yml**: An example CI/CD configurations for GitHub
+* **configuration/**: Folder containing all configuration files for the SCS,
+  with the exception of secrets, since secrets should never be stored in a
+  git repository. For a description of what every configuration file does,
+  please read the   [server configuration documentation](https://simple-configuration-server.github.io/docs/server-configuration)
+  and [configuration validation documentation](https://simple-configuration-server.github.io/docs/configuration-validation#2-scs-validateyaml-configuration-file).
+* **.github/workflows/main.yml**: An example CI/CD configuration for GitHub
   actions, that builds a Docker image with the configuration, and uses the
   included validation script to validate the configuration.
 * **.gitlab-ci.yml**: An example GitLab CI/CD configuration that's functionally
   equivalent to the GitHub configuration
-* **docker-compose.yml**: Example docker docker-compose configuration that uses
-  the image build using CI/CD to create and start a Docker container
 * **Dockerfile**: Example of you can build a Docker image that includes the
   configuration from this repository. This is used by the CI/CD pipeline to
   built the image.
+* **docker-compose.yml**: Example docker docker-compose configuration that uses
+  the image build using CI/CD to create and start a Docker container
 * **enable_githooks.sh**: Simple convenience script to enable pre-commit
   tests for the repository
 
@@ -45,42 +42,44 @@ It is bad practice to store secrets in git repositories. In case you run the
 variable and this directory is not empty, validation will fail. Although this
 example does include 'scs-users.yaml', all tokens are sourced from a secrets
 file (using the !scs-secret yaml tag) that is not in this repository. Based on
-your own consideration, you may also choose not to include 'scs-users.yaml' in
+your own consideration, you can also choose not to include 'scs-users.yaml' in
 your repository, since this is not required to run the 'validate' script. An
 SSL private key is also considered a secret and should never be in a git
 repository.
 
-### 1.1 Configuration directory sub-folders
-The configuration directory contains 2 folders:
-1. **endpoints/**: The structure and contents of this directory and its children
-   is used by SCS serve the endpoints under the /configs/ url paths. More info
-   [here](https://simple-configuration-server.github.io/docs/server-configuration/endpoints-directory).
-2. **common/**: A directory with YAML files that contain common files used by
-   multiple endpoints. More info [here](https://simple-configuration-server.github.io/docs/server-configuration/common-directory).
+### 1.1 Configuration directories
+This /common and /endpoints directories provide some examples of how to
+structure your data and endpoints in SCS.
 
-#### 1.1.1 common/ directory contents
-This contains some examples of how the 'common' directory can be used:
+#### 1.1.1 common/
+The common directory can be used to store configuration variables that are
+used by multiple endpoints, as described in the [documentation](https://simple-configuration-server.github.io/docs/server-configuration/common-directory).
+
+The [configuration/common](configuration/common) directory contains some
+examples of how this directory can be used:
 * **remote-files/**: This is an example of how configuration files from other
   sources, such as other git repositories, can be used by SCS. You can for
   example choose to include a global configuration file describing the
   properties of different environments, as a [git submodule](https://git-scm.com/book/en/v2/Git-Tools-Submodules)
   inside your configuration repository
 * **users/**: Another example where a 'common' directory comes in handy, is to
-  specify a list of users for a system in a central place. In this example
-  the list of users feeds the /elasticsearch/create_users.json file, as well as
-  the credentials files for the individual servers (e.g. /servers/first/es-credentials.json)
+  specify users of one or multiple systems in a central location. In this example
+  the [elasticsearch.yaml](configuration/common/users/elasticsearch.yaml)
+  contains all user-data, which is used in the /elasticsearch/create_users.json
+  endpoint as well as in the endpoints for individual servers (e.g. 
+  /servers/first/es-credentials.json).
 * **global.yaml**: Another example is just having a simple global configuration
-  file, so you can specify variables in one place, without having to
-  use a 'scs-env.yaml' file in the root of the config/ directory, since this
-  will add every variable to the context of every child directory/endpoint,
-  which you may not want (especially for secrets).
+  file, so you can specify variables in one place.
 
-#### 1.1.2 endpoints/ directory contents
-This contains some different examples of how you can structure the
-configuration paths of your SCS implementation. For example you can
-use paths for specific systems (elasticsearch/), paths for specific
-servers (servers/) and a section with global variables accessible by all
-users (var/).
+#### 1.1.2 endpoints/
+The endpoints directory defines the server endpoints as described in the
+[documentation](https://simple-configuration-server.github.io/docs/server-configuration/endpoints-directory).
+
+The [configuration/endpoints](configuration/endpoints) directory contains some
+different examples of how you can structure the endpoints of your SCS
+deployment. For example you can use paths for specific systems (elasticsearch/),
+paths for specific servers (servers/) and a section with global variables
+accessible by all users (var/).
 
 Note since you have to define path authorizations for each user in
 [scs-users.yaml](configuration/scs-users.yaml) (If you're using the built-in
